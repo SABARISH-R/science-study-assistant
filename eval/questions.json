@@ -1,0 +1,82 @@
+[
+  {
+    "question": "What are tectonic plates?",
+    "expected_topic": "plate_tectonics"
+  },
+  {
+    "question": "Why do plates move?",
+    "expected_topic": "plate_tectonics"
+  },
+  {
+    "question": "What happens at a convergent boundary?",
+    "expected_topic": "plate_tectonics"
+  },
+  {
+    "question": "Why do earthquakes happen along plate boundaries?",
+    "expected_topic": "plate_tectonics"
+  },
+  {
+    "question": "How are ocean trenches formed?",
+    "expected_topic": "ocean_floor"
+  },
+  {
+    "question": "What is seafloor spreading at mid-ocean ridges?",
+    "expected_topic": "ocean_floor"
+  },
+  {
+    "question": "How do scientists map the bottom of the sea with sonar?",
+    "expected_topic": "ocean_floor"
+  },
+  {
+    "question": "Where is the deepest point in the ocean?",
+    "expected_topic": "ocean_floor"
+  },
+  {
+    "question": "Why does salt lower the freezing point of water on roads?",
+    "expected_topic": "colligative_properties"
+  },
+  {
+    "question": "What is boiling point elevation?",
+    "expected_topic": "colligative_properties"
+  },
+  {
+    "question": "What is the van 't Hoff factor?",
+    "expected_topic": "colligative_properties"
+  },
+  {
+    "question": "What is osmotic pressure?",
+    "expected_topic": "colligative_properties"
+  },
+  {
+    "question": "Which electrode is the object being plated in electroplating?",
+    "expected_topic": "electroplating"
+  },
+  {
+    "question": "What reaction happens at the cathode when plating a metal?",
+    "expected_topic": "electroplating"
+  },
+  {
+    "question": "State Faraday's law for the mass of metal deposited.",
+    "expected_topic": "electroplating"
+  },
+  {
+    "question": "What is the role of mRNA in making proteins?",
+    "expected_topic": "protein_synthesis"
+  },
+  {
+    "question": "What is a codon?",
+    "expected_topic": "protein_synthesis"
+  },
+  {
+    "question": "What is the difference between transcription and translation?",
+    "expected_topic": "protein_synthesis"
+  },
+  {
+    "question": "Why does a protein's shape matter?",
+    "expected_topic": "protein_synthesis"
+  },
+  {
+    "question": "How does tRNA bring amino acids to the ribosome?",
+    "expected_topic": "protein_synthesis"
+  }
+]
