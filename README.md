@@ -55,3 +55,6 @@ TF-IDF is keyword-based, so paraphrased questions can miss. The notes are short 
 ## License
 
 MIT
+
+## Results
+See [RESULTS.md](RESULTS.md) for test output and the retrieval evaluation.
