@@ -33,6 +33,10 @@ PYTHONPATH=src python eval/run_eval.py
 
 `eval/questions.json` holds 20 questions with the topic each should retrieve. The baseline run measured **top-1 topic accuracy 19/20 and top-3 20/20**. Treat this as a smoke test, not a benchmark: the questions and notes were written by the same person, so scores are optimistic. Next step is evaluating with questions collected from real students and teachers.
 
+## Retrieval accuracy by topic
+
+![Retrieval accuracy by topic](docs/images/retrieval_accuracy_by_topic.png)
+
 ## Product docs
 
 | Doc | Purpose |

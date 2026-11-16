@@ -28,3 +28,8 @@ How to read this: each question has one expected topic, and a hit counts when th
 - Teacher review of the notes
 - Quality evaluation of the optional LLM mode
 - Evaluation on questions collected from real users
+
+## Figure
+Regenerate with `PYTHONPATH=src python scripts/make_figures.py` (needs matplotlib).
+
+![Retrieval accuracy by topic](docs/images/retrieval_accuracy_by_topic.png)
