@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Science Study Assistant — case study</title><style>
+:root{--bg:#fafaf7;--ink:#1d1d1f;--mut:#5f6368;--line:#e3e3de;--acc:#1a73e8;--warn:#b3261e;--card:#fff;--ok:#188038}
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+main{max-width:920px;margin:0 auto;padding:48px 24px 80px}
+.kicker{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);font-weight:600}
+h1{font-size:38px;line-height:1.15;margin:8px 0 12px;letter-spacing:-.02em}
+h2{font-size:22px;margin:48px 0 12px;padding-top:24px;border-top:1px solid var(--line)}
+.lede{font-size:19px;color:var(--mut);max-width:720px}
+.links a{display:inline-block;margin:16px 12px 0 0;padding:8px 14px;border:1px solid var(--ink);border-radius:999px;color:var(--ink);text-decoration:none;font-size:14px}
+.links a.p{background:var(--ink);color:#fff}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:28px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.stat b{display:block;font-size:28px;letter-spacing:-.02em}.stat span{font-size:13px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.card h3{margin:0 0 6px;font-size:15px}.card p{margin:0;color:var(--mut);font-size:15px}
+.demo{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+label{font-size:14px;color:var(--mut);display:block;margin:10px 0 4px}
+input,select{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;width:100%;background:#fff}
+input[type=range]{padding:0}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.out{margin-top:16px;padding:14px 16px;border-radius:8px;background:#f1f3f4;font-size:15px}
+.out.good{background:#e6f4ea}.out.bad{background:#fce8e6}
+button{font:inherit;padding:8px 14px;border-radius:8px;border:1px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer}
+button.ghost{background:#fff;color:var(--ink)}
+.chips button{margin:4px 6px 4px 0;font-size:13px;padding:5px 10px}
+.banner{background:#fef7e0;border:1px solid #f9e1a0;border-radius:8px;padding:10px 14px;font-size:14px;margin:12px 0}
+img{max-width:100%;border:1px solid var(--line);border-radius:8px;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+.bar{height:14px;border-radius:3px}
+.src{font-size:13px;color:var(--mut)}
+ol li,ul li{margin:4px 0}
+footer{margin-top:64px;color:var(--mut);font-size:13px}
+</style></head><body><main>
+<div class="kicker">AI product · Trust &amp; safety by design</div>
+<h1>Science Study Assistant: an AI tutor that would rather say "I don't know" than guess</h1>
+<p class="lede">Students ask follow-up questions after class, and general chatbots answer them confidently — sometimes wrongly. Teachers have no control over what students are told. This prototype tests a narrower bet: answer only from teacher-approved notes, show the source, and refuse when the notes don't cover it.</p>
+<div class="links"><a class="p" href="https://github.com/SABARISH-R/science-study-assistant">View code</a><a href="PRD.md">Read the PRD</a><a href="user_interview_guide.md">Interview guide</a></div>
+<div class="stats"><div class="stat"><b>95%</b><span>top-1 retrieval accuracy (19/20)</span></div><div class="stat"><b>100%</b><span>top-3 retrieval accuracy</span></div><div class="stat"><b>0 deps</b><span>runs offline, standard library only</span></div><div class="stat"><b>5 / 5</b><span>unit tests passing</span></div></div>
+
+<h2>The product bet</h2>
+<div class="grid"><div class="card"><h3>Users</h3><p>Grades 8–12 students revising; science teachers who want answers consistent with their curriculum.</p></div><div class="card"><h3>Principle</h3><p>A wrong-but-confident answer is worse than a refusal. v1 deliberately favours refusing.</p></div><div class="card"><h3>North-star + counter-metric</h3><p>Helpful answers per session; counter-metric: wrong-but-confident answers, reviewed by a teacher.</p></div><div class="card"><h3>Teacher control</h3><p>Teachers add or edit a topic by editing a markdown file — no code, no retraining.</p></div></div>
+
+<h2>Try it</h2>
+<div class="demo">
+<div style="display:flex;gap:8px"><input id="q" placeholder="Ask a science question…" value="How are ocean trenches formed?"><button id="ask">Ask</button></div>
+<div class="chips" style="margin-top:8px">
+<button class="ghost">Why does salt lower the freezing point of water?</button><button class="ghost">What happens during translation?</button><button class="ghost">How does electroplating work?</button><button class="ghost">Who won the 2022 World Cup?</button></div>
+<div class="out" id="ans"></div>
+<p class="src">This is the same TF-IDF retriever and 0.15 relevance threshold as <code>src/tutor</code>, running in your browser over the 22 note sections in <code>data/kb/</code>. Try an off-topic question to see the refusal.</p>
+</div>
+
+<h2>Evaluation</h2>
+<img src="images/retrieval_accuracy_by_topic.png" alt="Retrieval accuracy by topic">
+<p>Honest caveat: the 20 eval questions and the notes were written by the same author, so this is a smoke test, not a benchmark. The PRD's launch plan replaces it with questions collected from real students.</p>
+
+<h2>Decisions and trade-offs</h2>
+<ul>
+<li><b>Extractive by default, LLM optional</b>: safer and free; the LLM mode only sees retrieved passages and falls back to extractive on any error.</li>
+<li><b>TF-IDF before embeddings</b>: no network, explainable to a teacher. Revisit once the eval set is big enough to show paraphrase failures.</li>
+<li><b>Refusal threshold</b>: too high frustrates students, too low lets off-topic answers through — tuned against the counter-metric.</li>
+</ul>
+<h2>Next</h2>
+<ol><li>Interview 5+ teachers and 5+ students using the interview guide.</li><li>Teacher review of the notes; two-week pilot with one class.</li><li>Go/no-go on the PRD metrics.</li></ol>
+
+<footer>Built by Sabarish R · Everything on this page is reproducible from the repository · <a href="https://github.com/SABARISH-R/science-study-assistant/blob/main/RESULTS.md">RESULTS.md</a></footer></main>
+<script>const C=[{"topic": "colligative_properties", "heading": "What are colligative properties", "text": "Colligative properties are properties of a solution that depend on the number of dissolved solute particles, not on what the particles are. The four main ones are vapour pressure lowering, boiling point elevation, freezing point depression and osmotic pressure."}, {"topic": "colligative_properties", "heading": "Boiling point elevation", "text": "Adding a non-volatile solute raises the boiling point of the solvent. The rise is proportional to the molality of the solute, using the relation delta T = i x Kb x m, where Kb is a constant for the solvent and i is the van 't Hoff factor."}, {"topic": "colligative_properties", "heading": "Freezing point depression", "text": "Dissolving a solute lowers the freezing point of the solvent. This is why salt is spread on icy roads: salty water freezes at a lower temperature than pure water. The depression is delta T = i x Kf x m."}, {"topic": "colligative_properties", "heading": "Osmosis and osmotic pressure", "text": "Osmosis is the movement of solvent through a semipermeable membrane from a dilute solution to a more concentrated one. Osmotic pressure is the pressure needed to stop this flow, and it increases with the concentration of solute particles."}, {"topic": "colligative_properties", "heading": "Van 't Hoff factor", "text": "The van 't Hoff factor i counts how many particles one formula unit produces in solution. Glucose does not dissociate, so i is about 1, while sodium chloride gives two ions, so i is close to 2. More particles mean a larger colligative effect."}, {"topic": "electroplating", "heading": "What is electroplating", "text": "Electroplating is a process that coats an object with a thin layer of metal using an electric current. It is used to prevent corrosion, improve appearance, or increase wear resistance, for example chrome-plated taps or silver-plated cutlery."}, {"topic": "electroplating", "heading": "How electroplating works", "text": "The object to be plated is the cathode, connected to the negative terminal of a power supply. The anode is the plating metal, and both sit in an electrolyte containing ions of that metal. Metal ions gain electrons at the cathode and deposit as a solid layer."}, {"topic": "electroplating", "heading": "What happens at the electrodes", "text": "At the anode, metal atoms lose electrons and dissolve as positive ions, an oxidation reaction. At the cathode, metal ions gain electrons and are deposited as metal atoms, a reduction reaction. The electrolyte concentration stays roughly constant because the anode replaces what the cathode removes."}, {"topic": "electroplating", "heading": "Faraday's laws of electrolysis", "text": "The mass of metal deposited is proportional to the quantity of electric charge passed through the cell. For a given charge, the mass deposited is also proportional to the metal's molar mass divided by the number of electrons per ion."}, {"topic": "ocean_floor", "heading": "Main features of the ocean floor", "text": "The ocean floor has continental shelves near land, a steeper continental slope, a flat abyssal plain, mid-ocean ridges, and deep ocean trenches. Most of the deep seafloor is a vast, flat abyssal plain covered in fine sediment."}, {"topic": "ocean_floor", "heading": "Mid-ocean ridges and seafloor spreading", "text": "Mid-ocean ridges are underwater mountain chains where two plates diverge. Magma rises, cools and forms new oceanic crust, so the seafloor spreads outward. Crust is youngest at the ridge and gets older with distance from it."}, {"topic": "ocean_floor", "heading": "Ocean trenches", "text": "Ocean trenches are the deepest parts of the ocean. They form at subduction zones where a denser oceanic plate bends and sinks beneath another plate. The Mariana Trench in the western Pacific contains the deepest known point on Earth."}, {"topic": "ocean_floor", "heading": "How scientists map the seafloor", "text": "Ships use sonar, which sends sound pulses and times the echoes to measure depth. Satellites measure tiny changes in sea-surface height that reflect seafloor shape, and submersibles allow direct observation."}, {"topic": "plate_tectonics", "heading": "What are tectonic plates", "text": "Earth's outer shell, the lithosphere, is broken into large rigid pieces called tectonic plates. They float on the softer, slowly flowing asthenosphere beneath them and move a few centimetres each year, about as fast as fingernails grow."}, {"topic": "plate_tectonics", "heading": "Why plates move", "text": "Heat from Earth's interior drives mantle convection, where hotter material rises and cooler material sinks. Plates are also pulled by their own weight at subduction zones (slab pull) and pushed away from mid-ocean ridges (ridge push)."}, {"topic": "plate_tectonics", "heading": "Types of plate boundaries", "text": "At divergent boundaries plates move apart and new crust forms. At convergent boundaries plates collide, and one may sink beneath the other in subduction or both may crumple into mountains. At transform boundaries plates slide past each other, as along the San Andreas Fault."}, {"topic": "plate_tectonics", "heading": "Earthquakes and volcanoes", "text": "Most earthquakes and volcanoes occur along plate boundaries. Stress builds as plates stick, then releases suddenly as an earthquake. Volcanoes form where magma rises, often above subduction zones or at divergent boundaries."}, {"topic": "protein_synthesis", "heading": "Overview of protein synthesis", "text": "Protein synthesis is how cells build proteins from instructions stored in DNA. It has two main stages, transcription in the nucleus and translation at the ribosome, and follows the flow DNA to RNA to protein."}, {"topic": "protein_synthesis", "heading": "Transcription", "text": "During transcription the enzyme RNA polymerase reads a gene on DNA and builds a matching messenger RNA (mRNA) strand. In eukaryotes the mRNA is then processed and leaves the nucleus through nuclear pores."}, {"topic": "protein_synthesis", "heading": "Translation", "text": "In translation a ribosome reads the mRNA three bases at a time, in units called codons. Transfer RNA (tRNA) molecules bring the amino acid that matches each codon, and the ribosome joins the amino acids into a growing chain."}, {"topic": "protein_synthesis", "heading": "The genetic code", "text": "Each codon of three bases specifies one amino acid, or a start or stop signal. The code is nearly universal across living things, and several codons can code for the same amino acid, which is why it is called degenerate."}, {"topic": "protein_synthesis", "heading": "Folding and function", "text": "After translation the amino acid chain folds into a specific three-dimensional shape. That shape determines the protein's function, such as an enzyme speeding up a reaction or a structural protein giving strength to tissue."}];
+const SW=new Set("a an and are as at be by do does for from how in is it of on or that the this to what when where which why with i you your can we they them their into than".split(" "));
+const tok=s=>(s.toLowerCase().match(/[a-z0-9]+/g)||[]).filter(t=>!SW.has(t));
+const docs=C.map(c=>tok(`${c.heading} ${c.heading} ${c.text}`)),N=docs.length,df={};docs.forEach(d=>new Set(d).forEach(t=>df[t]=(df[t]||0)+1));
+const idf={};for(const t in df)idf[t]=Math.log((1+N)/(1+df[t]))+1;
+function vec(ts){const tf={};ts.forEach(t=>tf[t]=(tf[t]||0)+1);const v={};let n=0;for(const t in tf){v[t]=(1+Math.log(tf[t]))*(idf[t]||0);n+=v[t]*v[t]}n=Math.sqrt(n)||1;for(const t in v)v[t]/=n;return v}
+const V=docs.map(vec),$=id=>document.getElementById(id),esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function ask(){const q=vec(tok($('q').value)),hits=V.map((v,i)=>{let s=0;for(const t in q)s+=q[t]*(v[t]||0);return{i,s}}).filter(h=>h.s>=0.15).sort((a,b)=>b.s-a.s).slice(0,3),o=$('ans');
+if(!hits.length){o.className='out bad';o.innerHTML="<b>I couldn't find that in my notes.</b> Try rephrasing, or ask about plate tectonics, the ocean floor, colligative properties, electroplating, or protein synthesis.";return}
+const b=C[hits[0].i];o.className='out good';o.innerHTML=`${esc(b.text)}<br><br><span class="src">Sources:<br>${hits.map(h=>`· ${C[h.i].topic.replace(/_/g,' ')} › ${esc(C[h.i].heading)} (score ${h.s.toFixed(2)})`).join('<br>')}</span>`}
+$('ask').onclick=ask;$('q').onkeydown=e=>{if(e.key==='Enter')ask()};document.querySelectorAll('.chips button').forEach(b=>b.onclick=()=>{$('q').value=b.textContent;ask()});ask();
+</script></body></html>

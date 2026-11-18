@@ -1,5 +1,7 @@
 # Science Study Assistant
 
+> **Interactive case study:** https://sabarish-r.github.io/science-study-assistant/ (served from `docs/index.html`; enable GitHub Pages → main → /docs)
+
 A small, testable study aid that answers secondary-school science questions **only from a vetted set of notes**, and says "I don't know" when the notes don't cover the question. Built as a product experiment: the code is simple on purpose, and the interesting part is the product thinking in [`docs/`](docs).
 
 ## Problem
